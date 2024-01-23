@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer form</title>
+</head>
+<body>
+<form th:action="@{/v1/processCustomerForm}" th:Object="${customer}" method="POST">
+
+    <i> * required!</i>
+    <h3>Customer Registration Form</h3>
+
+    First name: <input text="text" th:field="*{firstName}"/>
+
+    <span th:if="${#fields.hasErrors('firstName')}"
+          th:errors="*{firstName}"
+          class="error" style="color: red"></span>
+
+    <br><br>
+
+    Last name:* <input text="text" th:field="*{lastName}"/>
+
+    <span th:if="${#fields.hasErrors('lastName')}"
+          th:errors="*{lastName}"
+          class="error" style="color: red"></span>
+
+    <br><br>
+
+
+    <br><br>
+
+
+    <input type="Submit" value="Submit"/>
+
+    <br><br>
+
+</form>
+</body>
+</html>
