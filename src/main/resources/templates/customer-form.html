@@ -10,7 +10,7 @@
     <i> * required!</i>
     <h3>Customer Registration Form</h3>
 
-    First name: <input text="text" th:field="*{firstName}"/>
+    First name:* <input text="text" th:field="*{firstName}"/>
 
     <span th:if="${#fields.hasErrors('firstName')}"
           th:errors="*{firstName}"
