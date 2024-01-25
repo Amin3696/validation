@@ -22,6 +22,15 @@
 
     <span th:if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}"
+          class="error" style="color: red">
+
+    </span>
+    <br><br>
+
+    Free Pass:* <input text="text" th:field="*{freePass}"/>
+
+    <span th:if="${#fields.hasErrors('freePass')}"
+          th:errors="*{freePass}"
           class="error" style="color: red"></span>
 
     <br><br>
