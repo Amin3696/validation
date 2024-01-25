@@ -4,10 +4,13 @@ import com.springdemo.mvc.model.Customer;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,6 +19,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CustomerController {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+
+
+    //add an initbinder ... to convert trim inputs
+    //remove leading and trailing whitespace
+    //resolve issue of validation with whitespace
+
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        var stringTrimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    }
 
     @GetMapping("/v1/customerForm")
     public String showCostomerForm(Model model) {
@@ -29,7 +43,9 @@ public class CustomerController {
     }
 
     @PostMapping("/v1/processCustomerForm")
-    public String processCustomer(@Valid @ModelAttribute("customer") Customer theCutomer, BindingResult bindingResult) {
+    public String processCustomer(
+            @Valid @ModelAttribute("customer") Customer theCutomer,
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             logger.error("Firstname and Lastname Validation is failed!");
