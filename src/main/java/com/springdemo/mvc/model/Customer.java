@@ -8,17 +8,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-    @NotNull()
-    @Size(min=1, message = "is required!")
+
+    @NotNull(message = "is required!")
+    @Size(min = 1, message = "is required!")
     private String firstName;
-    @NotNull()
+
+    @NotNull(message = "is required!")
     @Size(min = 1, message = "is required!")
     private String lastName;
+
+    @NotNull(message = "is required!")
     @Min(0)
     @Max(10)
-    @NotNull
     private Integer freePass;
-    @Pattern(regexp = "^[a-zA-Z0-9]{5}",message = "only 5 chars/digits")
+
+    @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
     private String postalCode;
 
     public String getFirstName() {
@@ -33,17 +37,17 @@ public class Customer {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+
+        this.lastName = lastName;
+    }
+
     public Integer getFreePass() {
         return freePass;
     }
 
     public void setFreePass(Integer freePass) {
         this.freePass = freePass;
-    }
-
-    public void setLastName(String lastName) {
-
-        this.lastName = lastName;
     }
 
     public String getPostalCode() {
