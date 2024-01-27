@@ -48,7 +48,7 @@ public class CustomerController {
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            logger.error("Firstname and Lastname Validation is failed!");
+            logger.error("Validation is failed! check First name, Last name, Free Pass or course code.");
             return "customer-form";
         } else {
             //Log2
